@@ -6,11 +6,10 @@ import {
 } from "./services/transaction.service";
 
 let client: DynamoDB;
-(() => {
-  console.log("Connecting to DynamoDB client...");
-  client = new DynamoDB({ region: "us-east-1" });
-  console.log("Connected!");
-})();
+
+console.log("Connecting to DynamoDB client...");
+client = new DynamoDB({ region: "us-east-1" });
+console.log("Connected!");
 
 const app = express();
 app.use(express.json());
