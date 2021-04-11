@@ -13,6 +13,7 @@
   "dependencies": {
     "@aws-sdk/client-dynamodb": "^3.12.0",
     "@aws/dynamodb-data-mapper": "^0.7.3",
+    "@aws/dynamodb-expressions": "^0.7.3",
     "aws-sdk": "^2.884.0",
     "body-parser": "^1.19.0",
     "express": "^4.17.1"
