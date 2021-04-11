@@ -25,9 +25,8 @@ app.get("/balance", async (req, res) => {
 
   const transactions = await getBalanceTransactions(client, req.body);
   if (transactions.length === 0) {
-    return res.status(204).send({
-      info: "No transactions were found with given address or spent type",
-    });
+    // 204 - No Content
+    return res.status(204).end();
   }
 
   const balance = calculateTotalBalance(transactions);
