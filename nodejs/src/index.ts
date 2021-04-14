@@ -1,9 +1,6 @@
 import express from "express";
 import DynamoDB from "aws-sdk/clients/dynamodb";
-import {
-  getBalanceTransactions,
-  calculateTotalBalance,
-} from "./services/transaction.service";
+import { getBalance } from "./services/transaction.service";
 
 let client: DynamoDB;
 
@@ -22,13 +19,7 @@ app.get("/balance", async (req, res) => {
     });
   }
 
-  const transactions = await getBalanceTransactions(client, req.body);
-  if (transactions.length === 0) {
-    // 204 - No Content
-    return res.status(204).end();
-  }
-
-  const balance = calculateTotalBalance(transactions);
+  const balance = await getBalance(client, req.body);
   return res.send(balance.toString());
 });
 
