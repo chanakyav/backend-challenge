@@ -25,10 +25,17 @@ async fn main() {
     let address: &str = address_input.trim();
     let spent: bool = spent_input.trim().parse().expect("Enter boolean values, ex. false");
     
+    /* 
+        Created a mutable scan_input variable because the scan function goes through DynamoDB
+        using pagination so we need to update the next key from which we run the scan from.
+        When we first run scan, there is no last evaluated key, so we start with None
+    */
     let mut scan_input: ScanInput = Default::default();
     update_scan_input(&mut scan_input, address, spent, None);
 
+
     let mut items: Vec<HashMap<String, AttributeValue>> = Vec::new();
+    // We loop until there is no last evaluated key
     'outer: loop {
         match client.scan(scan_input.clone()).await {
             Ok(output) => {
