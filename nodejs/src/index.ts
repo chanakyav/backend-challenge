@@ -20,7 +20,9 @@ app.get("/balance", async (req, res) => {
   }
 
   const balance = await getBalance(client, req.body);
-  return res.send(balance.toString());
+  return res.send({
+    balance: balance,
+  });
 });
 
 app.listen(3000, () => {
